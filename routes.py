@@ -11,8 +11,9 @@
 #
 
 routes_in = (
-	         ('.*:/favicon.ico', '/init/static/favicon.ico'),
-             ('.*:/robots.txt', '/init/static/robots.txt'))
+			 ('.*:/','/pp4gae/'), # rewrite to pp4gae
+	         ('.*:/favicon.ico', '/pp4gae/static/favicon.ico'),
+             ('.*:/robots.txt', '/pp4gae/static/robots.txt'))
 
 # routes_out, like routes_in translates URL paths created with the web2py URL()
 # function in the same manner that route_in translates inbound URL paths.
