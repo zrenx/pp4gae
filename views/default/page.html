@@ -1,0 +1,13 @@
+{{extend 'layout.html'}}
+
+<div class="post">
+	<h2>{{=post.post_title}}</h2>
+
+	<div class="entry">
+		<p>{{=hyper_text(post.post_text)}}</p>
+	</div>
+</div>
+
+<p>
+	{{if session.authorized:}}<a href="/{{=request.application}}/default/edit/page/{{=post.id}}">Edit this entry.</a>{{pass}}
+</p>

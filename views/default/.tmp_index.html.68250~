@@ -1,0 +1,75 @@
+{{extend 'layout.html'}}
+
+{{
+def get_post_cats(post_id):
+    print "before get categories"
+	#cats=db((db.posts.id == post_id) & (db.posts.post_category == db.categories.id)).select(db.categories.ALL)
+	cats=[]
+	cat_id=db(db.posts.id == post_id).select(db.posts.post_category)
+	print "cat_id:"+cat_id
+	cat=db(db.categories.id = cat_id).select(db.categories.ALL)
+	cats.append(cat)
+	#cat_id=db(db.posts.post_category.post_id == post_id).select(db.post_category.ALL)
+	#cats=db(db.posts.categories.id == 1).select(db.categories.ALL)
+	print "after post_category == 1"
+	#cats=db((db.posts.id == post_id) & (db.posts.post_category == db.categories.id)).select(db.categories.ALL)
+	items=[]
+	for cat in cats:
+		item="<a href='/%(app)s/default/category/%(cat)s'>%(name)s</a>" % {'app':request.application, 'cat':cat.category_name, 'name':cat.category_name}
+		items.append(item)
+	pass
+	cat_list=", ".join(items)
+	return XML(cat_list)
+	
+def get_post_cat(post_id):
+    print "before get categories"
+    #cats=db((db.posts.id == post_id) & (db.posts.post_category == db.categories.id)).select(db.categories.ALL)
+    cats=[]
+    cat=db(db.posts.id == post_id).select(db.posts.post_category)
+    #cats=db(db.posts.categories.id == 1).select(db.categories.ALL)
+    print "after post_category == 1"
+    #cats=db((db.posts.id == post_id) & (db.posts.post_category == db.categories.id)).select(db.categories.ALL)
+    items=[]
+    for cat in cats:
+        item="<a href='/%(app)s/default/category/%(cat)s'>%(name)s</a>" % {'app':request.application, 'cat':cat.category_name, 'name':cat.category_name}
+        items.append(item)
+    pass
+    cat_list=", ".join(items)
+    return XML(cat_list)
+	
+def get_comment_count(post_id):
+    print "before com_count:"+post_id
+	post_id=db(db.comments.post_id==post_id).select(db.comments.ALL)
+	com_count=1
+	#com_count=len(db(db.comments.post_id==post_id).select(db.comments.ALL))
+	print "com_count:"+com_count
+	if com_count == 0:
+		com_text="No Comments &raquo;"
+	elif com_count == 1:
+		com_text="1 Comment &raquo;"
+	else:
+		com_text="%s Comments &raquo;" % com_count
+	pass
+	com_link = "<a href='/%(app)s/default/post/%(id)s#comments'>%(text)s</a>" % {'app':request.application, 'id':post_id, 'text':com_text}
+	return XML(com_link)
+}}
+
+{{if posts:}}
+	{{for post in posts:}}
+	<div class="post">
+	    <h2><a href="/{{=request.application}}/default/post/{{=post.id}}">{{=post.post_title}}</a></h2>
+	    <small>{{=post.post_time.strftime("%B %d, %Y")}}</small>
+	    <div class="entry">
+	    	<p>
+				{{=post.post_text}}
+	    	</p>
+	    </div>
+		<p class="postmetadata">
+			Posted in {{=get_post_cats(post.id)}} | {{if session.authorized:}}<a href="/{{=request.application}}/default/edit/post/{{=post.id}}">Edit</a> | {{pass}}{{=get_comment_count(post.id)}}
+		</p>
+	</div>
+	{{pass}}
+{{else:}}
+	<h2 class="center">Not Found</h2>
+	<p class="center">Sorry, but you are looking for something that isn't here.</p>
+{{pass}}

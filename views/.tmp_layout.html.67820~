@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+    <head profile="http://gmpg.org/xfn/11">
+
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="{{=response.keywords}}" />
+        <meta name="description" content="{{=response.description}}" />
+        
+        <title>{{if response.title:}}{{=response.title}}{{else:}}{{=URL(r=request)}}{{pass}}</title>
+
+        <link rel="stylesheet" href="/{{=request.application}}/static/style.css" type="text/css" media="screen" />
+
+        <style type="text/css" media="screen">
+            #page { background: url("/{{=request.application}}/static/bg-ltr.jpg") repeat-y top; border: none; }
+        	#flash { 
+				width: 450px; 
+				margin: 0 auto; 
+				text-align: center; 
+				clear: both; 
+				border: 1px #000000; 
+				background-color: #6cade3; 
+				color: white; 
+				padding-top: 1.0em; 
+				padding-bottom: 1.0em;
+				margin-top: 20px; 
+			}
+		</style>
+        
+        {{include 'web2py_ajax.html'}}
+        
+    </head>
+
+    <body {{if response.flash:}}onload="fade('flash',0.1);"{{pass}}>
+        <div id="page">
+
+            <div id="header">
+                <div id="headerimg">
+                    <h1>
+                        <a href="/{{=request.application}}/default/index/">
+                        	[web2py<sup style="font-size:0.5em;">TM</sup>]
+                        	{{=request.application}}
+						</a>
+                    </h1>
+            
+                    <div class="description">
+                        {{=response.description}}
+                    </div>
+                </div>
+            </div>
+        
+            <hr />
+
+            <div id="content" class="narrowcolumn">
+            
+                {{if response.flash:}}
+                    <div id="flash">{{=response.flash}}</div>
+                {{pass}}
+            
+                {{include}}
+        
+            </div>
+
+            <div id="sidebar">
+				<ul>
+					
+					{{if response.sidebar_note:}}
+						<li>
+							<p>{{=response.sidebar_note}}</p>
+						</li>	
+					{{pass}}
+					
+					{{if response.menu:}}
+						<li>
+		                	<h2 class="widgettitle">Pages</h2>
+		                	<ul>
+		                    	{{for _name,_active,_link in response.menu:}}
+		                            <li><a href="{{=_link}}" {{if not _active:}}class="inactive"{{pass}}>{{=_name}}</a></li>
+		                        {{pass}}
+		                    </ul>
+						</li>
+					{{pass}}
+					
+					{{if response.categories:}}
+						<li>
+		                	<h2 class="widgettitle">
+		                		Categories
+								{{if session.authorized:}}
+									<span style="font-size: .8em; font-weight: normal;">
+										[<a href="/{{=request.application}}/default/manage/category">manage</a>]
+									</span>
+								{{pass}}					
+							</h2>
+		                	<ul>
+		                    	{{for _name,_count,_link in response.categories:}}
+		                            <li><a href="{{=_link}}">{{=_name}}</a> ({{=_count}})</li>
+		                        {{pass}}
+		                    </ul>					
+						</li>
+					{{pass}}
+					
+					{{if response.links:}}
+						<li>
+		                	<h2 class="widgettitle">
+		                		Links 
+								{{if session.authorized:}}
+									<span style="font-size: .8em; font-weight: normal;">
+										[<a href="/{{=request.application}}/default/manage/link">manage</a>]
+									</span>
+								{{pass}}
+							</h2>
+		               		<ul>
+		                    	{{for _name,_link,_id in response.links:}}
+		                            <li>
+		                            	<a target="_blank" href="{{=_link}}">{{=_name}}</a>
+									</li>
+		                        {{pass}}
+		                    </ul>						
+						</li>
+					{{pass}}
+					
+					{{if session.authorized:}}
+						<li>
+							<h2>Mini Admin</h2>
+							<ul>
+								<li><a href="/{{=request.application}}/default/add/page">Add Page</a></li>
+								<li><a href="/{{=request.application}}/default/add/post">Add Post</a></li>
+								<li><a href="/{{=request.application}}/default/add/category">Add Category</a></li>
+								<li><a href="/{{=request.application}}/default/add/link">Add Link</a></li>
+							</ul>
+						</li>
+					{{pass}}
+				</ul>
+            </div>
+
+            <hr />
+            
+            <div id="footer" style="height: 63px;">
+                <p>
+                    Powered by <a href="http://www.web2py.com">web2py</a> (TM) created by Massimo Di Pierro &copy; 2007, 2008
+                </p>
+            </div>
+            
+        </div>
+
+    </body>
+</html>

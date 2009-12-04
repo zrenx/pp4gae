@@ -1,0 +1,21 @@
+{{extend 'layout.html'}}
+
+{{if posts:}}
+	{{for post in posts:}}
+	<div class="post">
+	    <h2><a href="/{{=request.application}}/default/post/{{=post.id}}">{{=post.post_title}}</a></h2>
+	    <small>{{=post.post_time.strftime("%B %d, %Y")}}</small>
+	    <div class="entry">
+	    	<p>
+				{{=hyper_text(post.post_text)}}
+	    	</p>
+	    </div>
+		<p class="postmetadata">
+			Posted in {{=get_post_cats(post.id)}} | {{if session.authorized:}}<a href="/{{=request.application}}/default/edit/post/{{=post.id}}">Edit</a> | {{pass}}{{=get_comment_count(post.id)}}
+		</p>
+	</div>
+	{{pass}}
+{{else:}}
+	<h2 class="center">Not Found</h2>
+	<p class="center">Sorry, but you are looking for something that isn't here.</p>
+{{pass}}

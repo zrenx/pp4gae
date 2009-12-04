@@ -1,0 +1,91 @@
+{{extend 'layout.html'}}
+
+<div class="post">
+	<h2>{{=manage_title}}</h2>
+
+	<div class="entry">
+
+		{{if edit_form != "":}}
+		
+			<style type="text/css">
+				table {
+					margin-top: 5px;
+				}
+				td {
+					font-family: Arial, Helvetica, sans-serif;
+					vertical-align: top;
+					color: #777;
+					font-size: 0.9em;
+					padding: 0px 5px 0px 0px;
+					text-align: left;
+				}
+				input {
+					margin-bottom: 5px;
+				}
+				textarea {
+					width: 390px;
+				}
+			</style>
+			
+			<p>
+				{{=edit_form}}
+			</p>
+		
+		{{else:}}
+		
+			<p>
+				<table width="100%" cellpadding="3" cellspacing="0">
+					{{i = 0}}
+					{{for row in rows:}}
+					{{
+						i = i + 1
+						if i % 2 == 0:
+							color = '#ffffff'
+						else:
+							color = '#f3f3f3'
+						pass
+					}}
+						<tr style="background-color: {{=color}}">
+							{{if area == 'link':}}
+								<td>
+									{{=row.link_title}}<br/>
+									<span style="font-size: 10px; color: #666;">{{=row.link_url}}</span>
+								</td>	
+								<td style="font-size: 10px;" width="25">[<a href="/{{=request.application}}/default/manage/link/edit/{{=row.id}}">edit</a>]</td>
+								<td style="font-size: 10px;" width="25">[<a onclick="return window.confirm('Are you sure you want to delete this link?');" href="/{{=request.application}}/default/manage/link/delete/{{=row.id}}">delete</a>]</td>
+							{{elif area == 'category':}}
+								<td>
+									{{=row.category_name}}
+								</td>	
+								<td style="font-size: 10px;" width="25">[<a href="/{{=request.application}}/default/manage/category/edit/{{=row.id}}">edit</a>]</td>
+								<td style="font-size: 10px;" width="25">[<a onclick="return window.confirm('Are you sure you want to delete this category?');" href="/{{=request.application}}/default/manage/category/delete/{{=row.id}}">delete</a>]</td>
+							{{elif area == 'post':}}
+                                <td>
+                                    {{=row.post_title}}
+                                </td>   
+                                <td style="font-size: 10px;" width="25">[<a href="/{{=request.application}}/default/manage/post/edit/{{=row.id}}">edit</a>]</td>
+                                <td style="font-size: 10px;" width="25">[<a onclick="return window.confirm('Are you sure you want to delete this post?');" href="/{{=request.application}}/default/manage/post/delete/{{=row.id}}">delete</a>]</td>
+							{{elif area == 'page':}}
+                                <td>
+                                    {{=row.post_title}}
+                                </td>   
+                                <td style="font-size: 10px;" width="25">[<a href="/{{=request.application}}/default/manage/page/edit/{{=row.id}}">edit</a>]</td>
+                                <td style="font-size: 10px;" width="25">[<a onclick="return window.confirm('Are you sure you want to delete this page?');" href="/{{=request.application}}/default/manage/page/delete/{{=row.id}}">delete</a>]</td>
+                            {{pass}}
+						</tr>
+					{{pass}}
+					{{if area == 'link':}}
+						<tr><td colspan="3"><a href="/{{=request.application}}/default/manage/link/add">Add Link</a></td></tr>
+					{{elif area == 'category':}}
+						<tr><td colspan="3"><a href="/{{=request.application}}/default/manage/category/add">Add Category</a></td></tr>
+					{{elif area == 'post':}}
+                        <tr><td colspan="3"><a href="/{{=request.application}}/default/manage/post/add">Add Post</a></td></tr>
+					{{elif area == 'page':}}
+                        <tr><td colspan="3"><a href="/{{=request.application}}/default/manage/page/add">Add Page</a></td></tr>
+                    {{pass}}
+				</table>
+			</p>
+		
+		{{pass}}
+	</div>
+</div>

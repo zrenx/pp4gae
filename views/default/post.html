@@ -1,0 +1,69 @@
+{{extend 'layout.html'}}
+
+<div class="post">
+	<h2>{{=post.post_title}}</h2>
+	<div class="entry">
+		<p>{{=hyper_text(post.post_text)}}</p>
+		<p class="postmetadata alt" style="text-align: justify;">
+			<small>
+				Under: {{=get_post_cats(post.id)}} By: {{=get_post_author(post.post_author)}} / {{=post.post_time.strftime("%Y.%m.%d / %H:%M")}} 
+				{{if session.authorized:}}<a href="/{{=request.application}}/default/edit/page/{{=post.id}}">Edit</a>{{pass}}
+			</small>
+		</p>
+	</div>
+</div>
+
+{{if comment_count > 0:}}
+	<h3 id="comments">
+		{{=comment_count}} 
+		{{if comment_count == 1:}}
+			Response
+		{{else:}}
+			Responses
+		{{pass}}
+		to &#8220;{{=post.post_title}}&#8221;
+	</h3>
+{{pass}}
+
+<ol class="commentlist">
+	{{count=0}}
+	{{for comment in comments:}}
+		<li {{if count % 2 == 0:}}class="alt"{{pass}}>
+			<cite>
+				{{if comment.comment_author_website:}}
+					<a target="_blank" href='{{=url_text(comment.comment_author_website)}}'>{{=comment.comment_author}}</a>
+				{{else:}}
+					{{=comment.comment_author}}
+				{{pass}}
+			</cite> Says:<br />
+			<small class="commentmetadata">{{=comment.comment_time.strftime("%B %d, %Y at %I:%M %p")}}
+			{{if session.authorized:}}<a href="/{{=request.application}}/default/manage/comment/delete/{{=comment.id}}">Delete</a>{{pass}}
+			</small>
+			<p>{{=hyper_text(comment.comment_text)}}</p>
+		</li>
+		{{count = count + 1}}
+	{{pass}}
+</ol>
+
+<h3 id="respond">Leave a Reply</h3>
+
+<style type="text/css">
+	table {
+		margin-top: 5px;
+	}
+	td {
+		font-family: Arial, Helvetica, sans-serif;
+		vertical-align: top;
+		color: #777;
+		font-size: 0.9em;
+		padding: 0px 5px 0px 0px;
+	}
+	input {
+		margin-bottom: 5px;
+	}
+	textarea {
+		width: 390px;
+	}
+</style>
+
+{{=comment_form}}
