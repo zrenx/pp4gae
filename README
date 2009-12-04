@@ -29,8 +29,9 @@
 	python2.5 $GAE_DIR/dev_appserver.py ./
 	# visit http://localhost:8080/pp4gae
     deploy to appspot.com:
-	rm *.w2p # and any other apps under applications/
-	mv applications/pp4gae applications/init # default load this app
+	rm *.w2p # and any other apps under applications/ GAE don't needs these
+	cp ~/web2py/applications/pp4gae/routes.py ~/web2py/ #default load pp4gae
+	#mv applications/pp4gae applications/init # default load pp4gae
 
 	vim app.yaml 
 	# change "application: pp4gae" to "application: your_app"
