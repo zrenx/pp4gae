@@ -75,7 +75,7 @@
 		                	    Pages
 		                	    {{if session.authorized:}}
                                     <span style="font-size: .8em; font-weight: normal;">
-                                        [<a href="{{=URL(r=request,f='manage',args=['page'])}}">manage</a>]
+                                        [<a href="{{=URL(r=request,f='manage/page')}}">manage</a>]
                                     </span>
                                 {{pass}}
 		                	</h2>
@@ -92,7 +92,7 @@
                                 Posts
                                 {{if session.authorized:}}
                                     <span style="font-size: .8em; font-weight: normal;">
-                                        [<a href="{{=URL(r=request,f='manage',args=['post'])}}">manage</a>]
+                                        [<a href="{{=URL(r=request,f='manage/post')}}">manage</a>]
                                     </span>
                                 {{pass}}
                             </h2>
@@ -109,7 +109,7 @@
 		                		Categories
 								{{if session.authorized:}}
 									<span style="font-size: .8em; font-weight: normal;">
-										[<a href="{{=URL(r=request,f='manage',args=['category'])}}">manage</a>]
+										[<a href="{{=URL(r=request,f='manage/category')}}">manage</a>]
 									</span>
 								{{pass}}
 							</h2>
@@ -127,7 +127,7 @@
 		                		Links 
 								{{if session.authorized:}}
 									<span style="font-size: .8em; font-weight: normal;">
-										[<a href="{{=URL(r=request,f='manage',args=['link'])}}">manage</a>]
+										[<a href="{{=URL(r=request,f='manage/link')}}">manage</a>]
 									</span>
 								{{pass}}
 							</h2>
@@ -145,10 +145,10 @@
 						<li>
 							<h2>Mini Admin</h2>
 							<ul>
-								<li><a href="{{=URL(r=request,f='add',args=['page'])}}">Add Page</a></li>
-								<li><a href="{{=URL(r=request,f='add',args=['post'])}}">Add Post</a></li>
-								<li><a href="{{=URL(r=request,f='edit',args=['bloginfo'])}}">Edit Blog Info</a></li>
-								<li><a href="{{=URL(r=request,f='edit',args=['userinfo'])}}">Edit User Info</a></li>
+								<li><a href="{{=URL(r=request,f='add/page')}}">Add Page</a></li>
+								<li><a href="{{=URL(r=request,f='add/post')}}">Add Post</a></li>
+								<li><a href="{{=URL(r=request,f='edit/bloginfo')}}">Edit Blog Info</a></li>
+								<li><a href="{{=URL(r=request,f='edit/userinfo')}}">Edit User Info</a></li>
                                 <li><a href="{{=URL(r=request,f='logout')}}">Log Out</a></li>
 							</ul>
 						</li>
