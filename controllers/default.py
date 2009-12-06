@@ -12,7 +12,8 @@ response.description = bloginfo.description if bloginfo else "Just another pypre
 pages = db(db.posts.post_type == 'page').select(db.posts.ALL)
 items = []
 for page in pages:
-    item = [page.post_title, False, '/%(app)s/default/page/%(id)s' % {'app':request.application, 'id':page.id}]
+    #item = [page.post_title, False, '/%(app)s/default/page/%(id)s' % {'app':request.application, 'id':page.id}]
+    item = [page.post_title, False, URL(r=request,f='page/%d' % page.id)]
     items.append(item)
 response.menu = items
 
@@ -25,7 +26,8 @@ for cat in cats:
                    (db.posts.post_category == cat.id)
                    ).select(db.posts.ALL))
     if count > 0:
-        item = [cat.category_name, count, '/%(app)s/default/category/%(name)s' % {'app':request.application, 'name':cat.category_name}]
+        #item = [cat.category_name, count, '/%(app)s/default/category/%(name)s' % {'app':request.application, 'name':cat.category_name}]
+        item = [cat.category_name, count, URL(r=request,f='category/%s' % cat.category_name)]
         items.append(item)
 response.categories = items
 
@@ -41,7 +43,8 @@ response.links = items
 last_posts = db(db.posts.post_type == 'post').select(db.posts.ALL, orderby=~db.posts.post_time|~db.posts.post_title, limitby=(0,5))
 items = []
 for post in last_posts:
-    item = [post.post_title, post.post_time, '/%(app)s/default/post/%(id)s' % {'app':request.application, 'id':post.id}]
+    #item = [post.post_title, post.post_time, '/%(app)s/default/post/%(id)s' % {'app':request.application, 'id':post.id}]
+    item = [post.post_title, post.post_time, URL(r = request, f = 'post/%d' % post.id)]
     items.append(item)
 response.last_posts = items
 
@@ -90,11 +93,13 @@ def page():
 def category():
     try:
         cat_name = request.args[0]
+        #print 'start select db for category posts'
+        cat_id = db(db.categories.category_name == cat_name).select()[0].id
         posts = db(
                    (db.posts.post_type == 'post') &
-                   (db.posts.post_category == db.categories.id) &
-                   (db.categories.category_name == cat_name)
+                   (db.posts.post_category == cat_id)
                    ).select(db.posts.ALL, orderby=~db.posts.post_time)
+        #print posts
         response.sidebar_note = "You are currently browsing the archives for the %s category." % cat_name
         return dict(posts = posts)
     except:

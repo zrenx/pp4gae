@@ -51,37 +51,37 @@
 									{{=row.link_title}}<br/>
 									<span style="font-size: 10px; color: #666;">{{=row.link_url}}</span>
 								</td>	
-								<td style="font-size: 10px;" width="25">[<a href="/{{=request.application}}/default/manage/link/edit/{{=row.id}}">edit</a>]</td>
-								<td style="font-size: 10px;" width="25">[<a onclick="return window.confirm('Are you sure you want to delete this link?');" href="/{{=request.application}}/default/manage/link/delete/{{=row.id}}">delete</a>]</td>
+								<td style="font-size: 10px;" width="25">[<a href="{{=URL(r=request,f='manage/link/edit/%d' % row.id)}}">edit</a>]</td>
+								<td style="font-size: 10px;" width="25">[<a onclick="return window.confirm('Are you sure you want to delete this link?');" href="{{=URL(r=request,f='manage/link/delete/%d' % row.id)}}">delete</a>]</td>
 							{{elif area == 'category':}}
 								<td>
 									{{=row.category_name}}
 								</td>	
-								<td style="font-size: 10px;" width="25">[<a href="/{{=request.application}}/default/manage/category/edit/{{=row.id}}">edit</a>]</td>
-								<td style="font-size: 10px;" width="25">[<a onclick="return window.confirm('Are you sure you want to delete this category?');" href="/{{=request.application}}/default/manage/category/delete/{{=row.id}}">delete</a>]</td>
+								<td style="font-size: 10px;" width="25">[<a href="{{=URL(r=request,f='manage/category/edit/%d' % row.id)}}">edit</a>]</td>
+								<td style="font-size: 10px;" width="25">[<a onclick="return window.confirm('Are you sure you want to delete this category?');" href="{{=URL(r=request,f='manage/category/delete/%d' % row.id)}}">delete</a>]</td>
 							{{elif area == 'post':}}
                                 <td>
                                     {{=row.post_title}}
                                 </td>   
-                                <td style="font-size: 10px;" width="25">[<a href="/{{=request.application}}/default/manage/post/edit/{{=row.id}}">edit</a>]</td>
-                                <td style="font-size: 10px;" width="25">[<a onclick="return window.confirm('Are you sure you want to delete this post?');" href="/{{=request.application}}/default/manage/post/delete/{{=row.id}}">delete</a>]</td>
+                                <td style="font-size: 10px;" width="25">[<a href="{{=URL(r=request,f='manage/post/edit/%d' % row.id)}}">edit</a>]</td>
+                                <td style="font-size: 10px;" width="25">[<a onclick="return window.confirm('Are you sure you want to delete this post?');" href="{{=URL(r=request,f='manage/post/delete/%d' % row.id)}}">delete</a>]</td>
 							{{elif area == 'page':}}
                                 <td>
                                     {{=row.post_title}}
                                 </td>   
-                                <td style="font-size: 10px;" width="25">[<a href="/{{=request.application}}/default/manage/page/edit/{{=row.id}}">edit</a>]</td>
-                                <td style="font-size: 10px;" width="25">[<a onclick="return window.confirm('Are you sure you want to delete this page?');" href="/{{=request.application}}/default/manage/page/delete/{{=row.id}}">delete</a>]</td>
+                                <td style="font-size: 10px;" width="25">[<a href="{{=URL(r=request,f='manage/page/edit/%d' % row.id)}}">edit</a>]</td>
+                                <td style="font-size: 10px;" width="25">[<a onclick="return window.confirm('Are you sure you want to delete this page?');" href="{{=URL(r=request,f='manage/page/delete/%d' % row.id)}}">delete</a>]</td>
                             {{pass}}
 						</tr>
 					{{pass}}
 					{{if area == 'link':}}
-						<tr><td colspan="3"><a href="/{{=request.application}}/default/manage/link/add">Add Link</a></td></tr>
+						<tr><td colspan="3"><a href="{{=URL(r=request,f='manage/link/add')}}">Add Link</a></td></tr>
 					{{elif area == 'category':}}
-						<tr><td colspan="3"><a href="/{{=request.application}}/default/manage/category/add">Add Category</a></td></tr>
+						<tr><td colspan="3"><a href="{{=URL(r=request,f='manage/category/add')}}">Add Category</a></td></tr>
 					{{elif area == 'post':}}
-                        <tr><td colspan="3"><a href="/{{=request.application}}/default/manage/post/add">Add Post</a></td></tr>
+                        <tr><td colspan="3"><a href="{{=URL(r=request,f='manage/post/add')}}">Add Post</a></td></tr>
 					{{elif area == 'page':}}
-                        <tr><td colspan="3"><a href="/{{=request.application}}/default/manage/page/add">Add Page</a></td></tr>
+                        <tr><td colspan="3"><a href="{{=URL(r=request,f='manage/page/add')}}">Add Page</a></td></tr>
                     {{pass}}
 				</table>
 			</p>

@@ -11,15 +11,19 @@
 #
 
 routes_in = (
-             ('.*:/','/pp4gae/'), # rewrite to pp4gae
-             ('.*:/favicon.ico', '/pp4gae/static/favicon.ico'),
-             ('.*:/robots.txt', '/pp4gae/static/robots.txt'))
+             #('.*:/','/pp4gae/'), # rewrite to pp4gae
+             ('/static/(?P<file>[\w\./_-]+)','/pp4gae/static/\g<file>'),
+             ('/(?P<any>.*)', '/pp4gae/default/\g<any>'),
+             #'.*:/robots.txt', '/pp4gae/static/robots.txt'))
+)
 
 # routes_out, like routes_in translates URL paths created with the web2py URL()
 # function in the same manner that route_in translates inbound URL paths.
 #
 
-routes_out = ()
+routes_out = (
+              ('/pp4gae/default/(?P<any>.*)', '/\g<any>'),
+)
 
 # Error-handling redirects all HTTP errors (status codes >= 400) to a specified
 # path.  If you wish to use error-handling redirects, uncomment the tuple

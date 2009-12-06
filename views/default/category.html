@@ -5,7 +5,7 @@
 {{if posts:}}
 	{{for post in posts:}}
 	<div class="post">
-	    <h2><a href="/{{=request.application}}/default/post/{{=post.id}}">{{=post.post_title}}</a></h2>
+	    <h2><a href="{{=URL(r=request,f='post/%d' % post.id)}}">{{=post.post_title}}</a></h2>
 	    <small>{{=post.post_time.strftime("%B %d, %Y")}}</small>
 	    <div class="entry">
 	    	<p>
@@ -13,7 +13,7 @@
 	    	</p>
 	    </div>
 		<p class="postmetadata">
-			Posted in {{=get_post_cats(post.id)}} | {{if session.authorized:}}<a href="/{{=request.application}}/default/edit/post/{{=post.id}}">Edit</a> | {{pass}}{{=get_comment_count(post.id)}}
+			Posted in {{=get_post_cats(post.id)}} | {{if session.authorized:}}<a href="{{=URL(r=request,f='edit/post/%d' % post.id)}}">Edit</a> | {{pass}}{{=get_comment_count(post.id)}}
 		</p>
 	</div>
 	{{pass}}

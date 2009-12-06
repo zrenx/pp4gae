@@ -9,5 +9,5 @@
 </div>
 
 <p>
-	{{if session.authorized:}}<a href="/{{=request.application}}/default/edit/page/{{=post.id}}">Edit this entry.</a>{{pass}}
+	{{if session.authorized:}}<a href="{{=URL(r=request,f='edit/page/%d' % post.id)}}">Edit this entry.</a>{{pass}}
 </p>

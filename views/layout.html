@@ -36,7 +36,8 @@
             <div id="header">
                 <div id="headerimg">
                     <h1>
-                        <a href="/{{=request.application}}/default/index/">
+                        <!-- <a href="/{{=request.application}}/default/index/"> -->
+                        <a href="{{=URL(r=request,f='index')}}">
 							{{=response.name}}
 						</a>
                     </h1>
@@ -74,7 +75,7 @@
 		                	    Pages
 		                	    {{if session.authorized:}}
                                     <span style="font-size: .8em; font-weight: normal;">
-                                        [<a href="/{{=request.application}}/default/manage/page">manage</a>]
+                                        [<a href="{{=URL(r=request,f='manage',args=['page'])}}">manage</a>]
                                     </span>
                                 {{pass}}
 		                	</h2>
@@ -91,7 +92,7 @@
                                 Posts
                                 {{if session.authorized:}}
                                     <span style="font-size: .8em; font-weight: normal;">
-                                        [<a href="/{{=request.application}}/default/manage/post">manage</a>]
+                                        [<a href="{{=URL(r=request,f='manage',args=['post'])}}">manage</a>]
                                     </span>
                                 {{pass}}
                             </h2>
@@ -108,7 +109,7 @@
 		                		Categories
 								{{if session.authorized:}}
 									<span style="font-size: .8em; font-weight: normal;">
-										[<a href="/{{=request.application}}/default/manage/category">manage</a>]
+										[<a href="{{=URL(r=request,f='manage',args=['category'])}}">manage</a>]
 									</span>
 								{{pass}}
 							</h2>
@@ -126,7 +127,7 @@
 		                		Links 
 								{{if session.authorized:}}
 									<span style="font-size: .8em; font-weight: normal;">
-										[<a href="/{{=request.application}}/default/manage/link">manage</a>]
+										[<a href="{{=URL(r=request,f='manage',args=['link'])}}">manage</a>]
 									</span>
 								{{pass}}
 							</h2>
@@ -144,18 +145,18 @@
 						<li>
 							<h2>Mini Admin</h2>
 							<ul>
-								<li><a href="/{{=request.application}}/default/add/page">Add Page</a></li>
-								<li><a href="/{{=request.application}}/default/add/post">Add Post</a></li>
-								<li><a href="/{{=request.application}}/default/edit/bloginfo">Edit Blog Info</a></li>
-								<li><a href="/{{=request.application}}/default/edit/userinfo">Edit User Info</a></li>
-                                <li><a href="/{{=request.application}}/default/logout">Log Out</a></li>
+								<li><a href="{{=URL(r=request,f='add',args=['page'])}}">Add Page</a></li>
+								<li><a href="{{=URL(r=request,f='add',args=['post'])}}">Add Post</a></li>
+								<li><a href="{{=URL(r=request,f='edit',args=['bloginfo'])}}">Edit Blog Info</a></li>
+								<li><a href="{{=URL(r=request,f='edit',args=['userinfo'])}}">Edit User Info</a></li>
+                                <li><a href="{{=URL(r=request,f='logout')}}">Log Out</a></li>
 							</ul>
 						</li>
 					{{else:}}
                         <li>
                             <h2>Meta</h2>
                             <ul>
-                                <li><a href="/{{=request.application}}/default/login">Log In</a></li>
+                                <li><a href="{{=URL(r=request,f='login')}}">Log In</a></li>
                             </ul>
                         </li>
 					{{pass}}

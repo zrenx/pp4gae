@@ -7,7 +7,7 @@
 		<p class="postmetadata alt" style="text-align: justify;">
 			<small>
 				Under: {{=get_post_cats(post.id)}} By: {{=get_post_author(post.post_author)}} / {{=post.post_time.strftime("%Y.%m.%d / %H:%M")}} 
-				{{if session.authorized:}}<a href="/{{=request.application}}/default/edit/page/{{=post.id}}">Edit</a>{{pass}}
+				{{if session.authorized:}}<a href="{{=URL(r=request,f='edit/page/%d' % post.id)}}">Edit</a>{{pass}}
 			</small>
 		</p>
 	</div>
@@ -37,7 +37,7 @@
 				{{pass}}
 			</cite> Says:<br />
 			<small class="commentmetadata">{{=comment.comment_time.strftime("%B %d, %Y at %I:%M %p")}}
-			{{if session.authorized:}}<a href="/{{=request.application}}/default/manage/comment/delete/{{=comment.id}}">Delete</a>{{pass}}
+			{{if session.authorized:}}<a href="{{=URL(r=request,f='manage/comment/delete/%d' % comment.id)}}">Delete</a>{{pass}}
 			</small>
 			<p>{{=hyper_text(comment.comment_text)}}</p>
 		</li>

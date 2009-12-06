@@ -14,7 +14,7 @@ def get_comment_count(post_id):
     else:
         com_text="%s Comments &raquo;" % com_count
     pass
-    com_link = "<a href='/%(app)s/default/post/%(id)s#comments'>%(text)s</a>" % {'app':request.application, 'id':post_id, 'text':com_text}
+    com_link = "<a href='%(url)s'>%(text)s</a>" % {'url':URL(r=request,f='post/%d#comments' % post_id), 'text':com_text}
     return XML(com_link)
 
 def get_post_cats(post_id):
@@ -22,7 +22,7 @@ def get_post_cats(post_id):
     cats=db(db.categories.id == posts[0].post_category).select(db.categories.ALL)#[0]
     items=[]
     for cat in cats:
-        item="<a href='/%(app)s/default/category/%(cat)s'>%(name)s</a>" % {'app':request.application, 'cat':cat.category_name, 'name':cat.category_name}
+        item="<a href='%(url)s'>%(name)s</a>" % {'url':URL(r=request,f='category/%s' % cat.category_name), 'name':cat.category_name}
         items.append(item)
     pass
     cat_list=", ".join(items)
