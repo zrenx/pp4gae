@@ -2,52 +2,52 @@
 
 #pp4gae file structure
     project/
-	ABOUT
-	README
-	LICENSE
-	TODO
-	__init__.py
-	app.yaml
-	controllers/
-	cron/
-	languages/
-	models/
-	modules/
-	routes.py
-	static/
-	views/
+    ABOUT
+    README
+    LICENSE
+    TODO
+    __init__.py
+    app.yaml
+    controllers/
+    cron/
+    languages/
+    models/
+    modules/
+    routes.py
+    static/
+    views/
 
 #usage
     make you have installed python, Google App Engine SDK
     prepare:
-	download web2py from http://web2py.com/examples/default/download
-	unpackage web2py
-	cp -r ~/pp4gae ~/web2py/applications/
-	cp ~/web2py/applications/pp4gae/app.yaml ~/web2py/
-	cp ~/web2py/applications/pp4gae/routes.py ~/web2py/
+    download web2py from http://web2py.com/examples/default/download
+    unpackage web2py
+    cp -r ~/pp4gae ~/web2py/applications/
+    cp ~/web2py/applications/pp4gae/app.yaml ~/web2py/
+    cp ~/web2py/applications/pp4gae/routes.py ~/web2py/
     
     run locally:
-	cd ~/web2py
-	python2.5 $GAE_DIR/dev_appserver.py ./
-	# visit http://localhost:8080/
-	
+    cd ~/web2py
+    python2.5 $GAE_DIR/dev_appserver.py ./
+    # visit http://localhost:8080/
+    
     deploy to appspot.com:
-	rm *.w2p # and any other apps under applications/ GAE don't needs these, better this way
-	vim app.yaml 
-	# change "application: pp4gae" to "application: your_app"
-
-	python2.5 $GAE_DIR/appcfg.py update ./
-	# http://your_app.appspot.com might won't work right away,
-	# GAE sever needs some time to index the database,
-	# so wait and check again
-
+    rm *.w2p # and any other apps under applications/ GAE don't needs these, better this way
+    vim app.yaml 
+    # change "application: pp4gae" to "application: your_app"
+    
+    python2.5 $GAE_DIR/appcfg.py update ./
+    # http://your_app.appspot.com might won't work right away,
+    # GAE sever needs some time to index the database,
+    # so wait and check again
+    
     after deployed successfully:
-	login with email:"admin",password:"admin"
-	change your password and edit your information
-	next time login with your email and new password
+    login with email:"admin",password:"admin"
+    change your password and edit your information
+    next time login with your email and new password
     NOTES:
-	1. "python web2py.py" works, but admin won't work on this, caused by GAE
-	2. I suggest don't change the directory name "pp4gae", it may cause pp4gae not work, unless you modify routes.py accordingly 
+    1. "python web2py.py" works, but admin won't work on this, caused by GAE
+    2. I suggest don't change the directory name "pp4gae", it may cause pp4gae not work, unless you modify routes.py accordingly 
     3. (add more later)
     
 Any questions email to: zrenx.cn@gmail.com
