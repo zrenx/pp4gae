@@ -414,3 +414,16 @@ def logout():
     session.flash='User logged out'
     redirect(URL(r=request,f='index'))
     
+
+#http://www.web2py.com/examples/static/epydoc/web2py.gluon.sql.Field-class.html
+def test():
+    form = SQLFORM(db.file,fields=['file','note'])
+    if request.vars.file!=None:
+        form.vars.filename=request.vars.file.filename
+    if form.accepts(request.vars, session):
+        response.flash='file '+form.vars.file.filename+' uploaded'
+        #response.flash='file uploaded'
+    return dict(page_form=form,page_title='upload file')
+
+def image():
+    return response.stream(db().select(db.file.ALL)[0])

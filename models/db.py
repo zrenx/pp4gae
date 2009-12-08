@@ -43,6 +43,13 @@ db.define_table('links',
     Field('link_title', required=True),
     Field('link_url', required=True))
 
+db.define_table('file',
+    Field('file','upload'),
+    Field('filename'),
+    Field('hash'),
+    Field('note'),
+    Field('mimetype'))
+
 db.posts.post_type.requires = IS_IN_SET(['post', 'page'])
 db.posts.post_author.requires = IS_IN_DB(db, 'user.id', 'user.alias')
 db.posts.post_category.requires = IS_IN_DB(db, 'categories.id', 'categories.category_name')
