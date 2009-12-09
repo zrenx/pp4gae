@@ -425,5 +425,21 @@ def test():
         #response.flash='file uploaded'
     return dict(page_form=form,page_title='upload file')
 
+#http://stackoverflow.com/questions/1300908/pyqt4-load-blob-image-data-into-qpixmap
 def image():
-    return response.stream(db().select(db.file.ALL)[0])
+    images = db().select(db.file.ALL)
+
+    import pickle
+    blob = images[0].file_blob
+    #return blob
+    #return dict(image=blob)
+    print blob
+    #print "aaa"
+    o = pickle.loads(blob)
+    c = StringIO.StringIO()
+    c.write(o)
+    c.seek(0)
+    #im = Image.open(c)
+    return c
+    #return im
+    

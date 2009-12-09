@@ -1,3 +1,5 @@
 {{extend 'layout.html'}}
 
-/app/controller/download/{{=image.file}}/{{=image.filename}}
+{{if image:}}
+<img src="{{=URL(r=request,f='image')}}" />
+
