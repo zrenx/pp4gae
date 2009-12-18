@@ -1,0 +1,11 @@
+{{extend 'layout.html'}}
+
+<h2>SHOW FILES</h2>
+
+<ul>
+{{for file in files:}}
+    <li>
+    <a href="{{=URL(r=request,f='download', args=[file.file])}}">{{=file.title}}({{=get_file_name(file.file)}})</a> @ {{=file.upload_time.strftime("%Y.%m.%d / %H:%M")}}
+	</li>
+{{pass}}
+</ul>

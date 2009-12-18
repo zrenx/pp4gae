@@ -1,5 +1,7 @@
 {{extend 'layout.html'}}
 
-{{if image:}}
-<img src="{{=URL(r=request,f='image')}}" />
+<h2>SHOW IMAGE</h2>
+{{for image in images:}}
+    <img src="{{=URL(r=request,f='download', args=[image.file])}}" />
+{{pass}}
 

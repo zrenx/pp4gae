@@ -41,3 +41,16 @@ def url_text(text):
         return text
     else:
         return 'http://'+text
+    
+def get_file_type(text):
+    images = ['image/jpeg','image/gif','image/png']
+    if re.match("image/.+", str(text)):
+        return 'image'
+    else:
+        return 'file'
+
+
+def get_file_name(text):
+    import base64
+    encoded_name = text.split('.')[3]
+    return base64.b16decode(encoded_name.upper()).decode('utf_8')

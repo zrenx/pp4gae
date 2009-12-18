@@ -44,11 +44,10 @@ db.define_table('links',
     Field('link_url', required=True))
 
 db.define_table('file',
+    Field('title'),
     Field('file','upload'),
-    Field('filename'),
-    Field('hash'),
-    Field('note'),
-    Field('mimetype'))
+    Field('type'),
+    Field('upload_time','datetime', default=datetime.datetime.today()))
 
 db.posts.post_type.requires = IS_IN_SET(['post', 'page'])
 db.posts.post_author.requires = IS_IN_DB(db, 'user.id', 'user.alias')

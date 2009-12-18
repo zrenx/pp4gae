@@ -417,29 +417,25 @@ def logout():
 
 #http://www.web2py.com/examples/static/epydoc/web2py.gluon.sql.Field-class.html
 def test():
-    form = SQLFORM(db.file,fields=['file','note'])
+    import mimetypes
+    import re
+    form = SQLFORM(db.file,fields=['title','file'])
     if request.vars.file!=None:
-        form.vars.filename=request.vars.file.filename
+        form.vars.file=request.vars.file
+        form.vars.type=get_file_type(mimetypes.guess_type(form.vars.file.filename)[0])
     if form.accepts(request.vars, session):
         response.flash='file '+form.vars.file.filename+' uploaded'
         #response.flash='file uploaded'
     return dict(page_form=form,page_title='upload file')
-
-#http://stackoverflow.com/questions/1300908/pyqt4-load-blob-image-data-into-qpixmap
-def image():
-    images = db().select(db.file.ALL)
-
-    import pickle
-    blob = images[0].file_blob
-    #return blob
-    #return dict(image=blob)
-    print blob
-    #print "aaa"
-    o = pickle.loads(blob)
-    c = StringIO.StringIO()
-    c.write(o)
-    c.seek(0)
-    #im = Image.open(c)
-    return c
-    #return im
     
+def image():
+    #images=db(re.match('image/.+',db.file.mimetype)).select(db.file.ALL,orderby=db.file.file)
+    images=db(db.file.type == 'image').select(db.file.ALL,orderby=db.file.file)
+    return dict(images=images)
+    
+def file():
+    files=db(db.file.type == 'file').select(db.file.ALL,orderby=db.file.file)
+    return dict(files=files)
+
+def download():
+    return response.download(request,db)
